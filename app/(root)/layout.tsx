@@ -1,5 +1,5 @@
   
- import Navbar from "@/app/componets/Navbar" 
+ import Navbar from "@/componets/Navbar" 
 export default function Latout({ children} : Readonly <{ children : React.ReactNode}>) {
     return(
         <main className="font-work-sans">
