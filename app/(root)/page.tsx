@@ -1,6 +1,33 @@
 import Image from "next/image";
  import SearchForm from "@/componets/SearchForm";
-export default function Home() {
+import { auth } from "@/auth";
+import StartupCard from "@/componets/StartupCard";
+ 
+export default async function Home({  searchParams, } :  {
+   searchParams: Promise<{ query?: string }>;
+}) {
+  const query = (await searchParams).query;
+  const params = { search: query || null };
+
+  const session = await auth();
+
+  // console.log(session?.id);
+
+  // const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
+
+  const posts = [{
+    _createdAt : new Date(),
+    views: '5',
+    author: { _id: 1 , name: 'Basit'},
+    _id: 1,
+    description: 'this is a description',
+    image: "https://as2.ftcdn.net/jpg/01/65/58/33/1000_F_165583319_U8ZxvmUjdzo6DI5TwT73gEhSpUC5mbc7.jpg",
+    category : 'Robots',
+    title: 'we robots'
+
+
+  }]
+  
   return (
      <>
      <section
@@ -22,7 +49,23 @@ export default function Home() {
           Competitions.
         </p>
 
-        <SearchForm />
+        <SearchForm  query={query}/>
+
+     </section>
+     <section className="px-6 py-10 max-w-7xl mx-auto">
+       <p className="text-30-semibold text-black">
+          {query ? `Search results for "${query}"` : "All Startups"}
+        </p>
+
+        <ul className="mt-7 grid md:grid-cols-3 sm:grid-cols-2 gap-5">
+          {posts?.length > 0 ? (
+            posts.map((post: StartupTypeCard) => (
+              <StartupCard key={post?._id} post={post} />
+            ))
+          ) : (
+            <p className="no-results">No startups found</p>
+          )}
+        </ul>
 
      </section>
      </>
