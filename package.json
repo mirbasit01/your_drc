@@ -8,20 +8,25 @@
     "start": "next start",
     "lint": "next lint",
     "predev": "npm run typegen",
-  "prebuild": "npm run typegen",
-  "typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate "
+    "prebuild": "npm run typegen",
+    "typegen": "sanity schema extract --path=./sanity/extract.json && sanity typegen generate "
   },
   "packageManager": "npm@10.5.2",
   "overrides": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
+  "types": {
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/next-auth.d.ts"]
+}
+,
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
-    "@sanity/client": "^6.29.1",
+    "@sanity/client": "^7.6.0",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.99.0",
+    "@sanity/visual-editing": "^2.15.2",
     "@tailwindcss/typography": "^0.5.16",
     "auth": "^1.2.3",
     "autoprefixer": "^10.4.21",
@@ -36,6 +41,7 @@
     "react-dom": "^19.1.0",
     "sanity": "^3.99.0",
     "sanity-plugin-markdown": "^5.1.2",
+    "slugify": "^1.6.6",
     "styled-components": "^6.1.19",
     "tailwind": "^2.3.1",
     "tailwind-merge": "^3.3.1",

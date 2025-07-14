@@ -41,12 +41,14 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
           </Link>
         </div>
         <Link href={`/user/${author?._id}`}>
-          <image src={author?.image}
-            alt={author?.name!}
-            width={48}
-            height={48}
-            className="rounded-full"
-          />
+     <img
+  src={author?.image || "/fallback.jpg"}
+  alt={author?.name || "Author Image"}
+  width={48}
+  height={48}
+  className="rounded-full"
+/>
+
         </Link>
       </div>
 
@@ -60,7 +62,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         <Link href={`/?query=${category?.toLowerCase()}`}>
           <p className="text-16-medium">{category}</p>
         </Link>
-        <button className="rounded-full bg-black font-medium text-[16px] text-white px-5 py-3 !important;" asChild>
+        <button className="rounded-full bg-black font-medium text-[16px] text-white px-5 py-3 !important;" >
           <Link href={`/startup/${_id}`}>Details</Link>
         </button>
       </div>
@@ -68,14 +70,6 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
   );
 };
 
-// export const StartupCardSkeleton = () => (
-//   <>
-//     {[0, 1, 2, 3, 4].map((index: number) => (
-//       <li key={cn("skeleton", index)}>
-//         <Skeleton className="startup-card_skeleton" />
-//       </li>
-//     ))}
-//   </>
-// );
+ 
 
 export default StartupCard;
