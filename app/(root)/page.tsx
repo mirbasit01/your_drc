@@ -2,42 +2,18 @@ import Image from "next/image";
 import SearchForm from "@/componets/SearchForm";
 import { auth } from "@/auth";
 import StartupCard, { StartupTypeCard } from "@/componets/StartupCard";
-import { client } from "@/sanity/lib/client";
-import { STARTUPS_QUERY } from "@/sanity/lib/queries";
-import { json } from "stream/consumers";
-import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+ import { STARTUPS_QUERY } from "@/sanity/lib/queries";
+ import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
 export default async function Home({ searchParams, }: {
-  searchParams: Promise<{ query?: string }>;
-}) {
+  searchParams: Promise<{ query?: string }>;}) {
   const query = (await searchParams).query;
   const params = { search: query || null };
-
   const session = await auth();
-
   // console.log(session?.id);
-// 
   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
-
-
   //  const posts = await client.fetch(STARTUPS_QUERY)
-
    console.log(JSON.stringify(posts , null , 2))
-
- 
-  // const posts = [{
-  //   _createdAt: new Date(),
-  //   views: '5',
-  //   author: { _id: 1, name: 'basit' },
-  //   _id: 1,
-  //   description: 'this is a description',
-  //   image: "https://as2.ftcdn.net/jpg/01/65/58/33/1000_F_165583319_U8ZxvmUjdzo6DI5TwT73gEhSpUC5mbc7.jpg",
-  //   category: 'Robots',
-  //   title: 'we robots'
-
-
-  // }]
-
   return (
     <>
       <section
