@@ -16,10 +16,6 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
-  "types": {
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/next-auth.d.ts"]
-}
-,
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
     "@sanity/client": "^7.6.0",
@@ -41,6 +37,7 @@
     "react-dom": "^19.1.0",
     "sanity": "^3.99.0",
     "sanity-plugin-markdown": "^5.1.2",
+    "server-only": "^0.0.1",
     "slugify": "^1.6.6",
     "styled-components": "^6.1.19",
     "tailwind": "^2.3.1",
