@@ -2,11 +2,12 @@ import { cn, formatDate } from "@/lib/utils";
 import { EyeIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { Author, Startup } from "@/sanity/types";
 // import { Button } from "@/components/ui/button";
 // import { Author, Startup } from "@/sanity/types";
 // import { Skeleton } from "@/components/ui/skeleton";
 
-export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
+export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author};
 
 const StartupCard = ({ post }: { post: StartupTypeCard }) => {
   const {
@@ -40,9 +41,8 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
           </Link>
         </div>
         <Link href={`/user/${author?._id}`}>
-          <image src='https://placehold.co/48x48'
-        alt='IMGES'
-            // alt={author?.name!}
+          <image src={author?.image}
+            alt={author?.name!}
             width={48}
             height={48}
             className="rounded-full"
