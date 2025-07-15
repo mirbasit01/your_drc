@@ -49,7 +49,7 @@ export default async function Home({ searchParams, }: {
               <StartupCard key={post?._id} post={post} />
             ))
           ) : (
-            <p className="no-results">No startups found</p>
+            <p className="text-black-100 text-sm font-normal">No startups found</p>
           )}
         </ul>
 
