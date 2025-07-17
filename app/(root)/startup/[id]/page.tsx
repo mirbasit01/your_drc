@@ -111,8 +111,7 @@ import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import markdownit from 'markdown-it'
 import { Skeleton } from '@/componets/ui/skeleton';
-import View from '@/componets/View';
-
+ import View from '@/componets/View';
 
 const md = markdownit()
 
@@ -196,9 +195,9 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
                         <hr className='border-dotted bg-zinc-400 max-w-4xl my-10 mx-auto' />
 
-                        <Suspense fallback={<Skeleton className='bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3' />}>
+                        <Suspense fallback={<Skeleton className='bg-red-500 h-10 w-24 rounded-lg fixed bottom-3 right-3' />}>
 
-                           <View id={id}/>
+                           <View id={id} initialViews={post?.views || 0}/>
                         </Suspense>
 
                   </section>
