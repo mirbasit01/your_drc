@@ -3,18 +3,36 @@ import SearchForm from "@/componets/SearchForm";
 import { auth } from "@/auth";
 import StartupCard, { StartupTypeCard } from "@/componets/StartupCard";
  import { STARTUPS_QUERY } from "@/sanity/lib/queries";
- import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+//  import { sanityFetch, SanityLive } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 
 export default async function Home({ searchParams, }: {
-  searchParams: Promise<{ query?: string }>;}) {
-  const query = (await searchParams).query;
-  const params = { search: query || null };
+  // searchParams: Promise<{ query?: string }>
+    searchParams: Promise<{ query?: string }>;
+
+  }) {
+  // const query = (await searchParams).query;
+  // const params = { search: query || null };
+  // const params = { search: query || undefined };
+// const params = { search: 'fintech' };
+
   const session = await auth();
   console.log(searchParams , 'searchParams')
   console.log(session?.id , 'idddddddddddddd');
-  const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
-  //  const posts = await client.fetch(STARTUPS_QUERY)
-   console.log(JSON.stringify(posts , null , 2))
+  // const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY, params });
+    // const {data: posts} = await client.fetch({query: STARTUPS_QUERY, params})
+    // const data = await client.fetch(STARTUPS_QUERY, params);
+
+
+    // const query = searchParams.query;
+    const { query = null } = await searchParams;
+    console.log(query, 'queryyyyyyyyyyyyyyyyyyyyyy');
+
+const params = query ? { search: query } : { search: null };
+
+const data = await client.fetch(STARTUPS_QUERY, params);
+
+    console.log(JSON.stringify(data , null , 2))
   return (
     <>
       <section
@@ -36,7 +54,7 @@ export default async function Home({ searchParams, }: {
           Competitions.
         </p>
 
-        <SearchForm query={query} />
+        <SearchForm query={query ?? undefined} />
 
       </section>
       <section className="px-6 py-10 max-w-7xl mx-auto">
@@ -45,8 +63,8 @@ export default async function Home({ searchParams, }: {
         </p>
 
         <ul className="mt-7 grid md:grid-cols-3 sm:grid-cols-2 gap-5">
-          {posts?.length > 0 ? (
-            posts.map((post: StartupTypeCard) => (
+          {data?.length > 0 ? (
+            data.map((post: StartupTypeCard) => (
               <StartupCard key={post?._id} post={post} />
             ))
           ) : (
@@ -56,7 +74,7 @@ export default async function Home({ searchParams, }: {
 
       </section>
 
-      <SanityLive/>
+      {/* <SanityLive/> */}
 
 
     </>
