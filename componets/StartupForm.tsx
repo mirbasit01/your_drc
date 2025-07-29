@@ -227,11 +227,12 @@ const StartupForm = () => {
           description: "Your startup pitch has been created successfully",
         });
 
-        router.push(`/startup/${result.title}`);
+        router.push(`/startup/${result._id}`);
       }
 
       return result;
     } catch (error) {
+      console.log(error , 'errorerrorerrorerrorerror')
       if (error instanceof z.ZodError) {
         const fieldErrors: Record<string, string[] | undefined> = {
   title: ['Title is required', 'Title must be at least 3 characters'],
@@ -308,7 +309,7 @@ const StartupForm = () => {
           name="description"
           className="border-[3px] border-black p-5 text-[18px] text-black font-semibold rounded-[20px] mt-3 placeholder:text-black-300"
           placeholder="Startup Description"
-          required
+           
         />
         {errors.description && (
           <p className="text-red-500 mt-2 ml-5">{errors.description}</p>
