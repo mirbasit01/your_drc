@@ -34,7 +34,7 @@ Before you begin, ensure you have:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/your_drc.git
+  [ git clone https://github.com/yourusername/your_drc.git](https://github.com/mirbasit01/your_drc.git)
    cd your_drc
    ```
 
