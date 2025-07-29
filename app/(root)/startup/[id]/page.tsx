@@ -22,15 +22,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
       const id = (await params).id;
       const session = await auth();
-      // const post = await client.fetch(STARTUPS_BY_ID_QUERY, { id });
-      // console.log(post, 'usersss')
-
-      // const {select : editorPosts} = await client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: 'editor-picks-new'})
-//       const [post, { select: editorPosts }] = await Promise.all([
-//     client.fetch(STARTUPS_BY_ID_QUERY, { id }),
-//     client.fetch(PLAYLIST_BY_SLUG_QUERY, {
-//       slug: "editor-picks-new",}),
-//   ]);
+   
+      
 const [post, playlist] = await Promise.all([
   client.fetch(STARTUPS_BY_ID_QUERY, { id }),
   client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: "editor-picks-new" }),
