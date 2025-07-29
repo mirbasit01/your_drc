@@ -3,6 +3,7 @@ import { EyeIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Author, Startup } from "@/sanity/types";
+import { Skeleton } from "./ui/skeleton";
 // import { Button } from "@/components/ui/button";
 // import { Author, Startup } from "@/sanity/types";
 // import { Skeleton } from "@/components/ui/skeleton";
@@ -71,5 +72,14 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
 };
 
  
+export const StartupCardSkeleton = () => (
+  <>
+    {[0, 1, 2, 3, 4].map((index: number) => (
+      <li key={cn("skeleton", index)}>
+        <Skeleton className="startup-card_skeleton" />
+      </li>
+    ))}
+  </>
+);
 
 export default StartupCard;
