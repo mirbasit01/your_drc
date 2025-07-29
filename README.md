@@ -12,19 +12,23 @@ A modern startup directory platform built with Next.js and Sanity CMS, designed 
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: Next.js 14+ (React)
-- **CMS**: Sanity
-- **Styling**: Tailwind CSS
-- **TypeScript**: Full type safety
-- **Icons**: Lucide React
+- **Frontend**: Next.js 15.3.5 (React 19.1.0)
+- **CMS**: Sanity 3.22.0
+- **Authentication**: NextAuth.js 5.0 (Beta)
+- **Styling**: Tailwind CSS 4.1.11
+- **TypeScript**: Full type safety with TS 5+
+- **Icons**: Lucide React 0.525.0
+- **Rich Text**: Portable Text & Markdown support
+- **UI Components**: Radix UI primitives
 
 ## 📋 Prerequisites
 
 Before you begin, ensure you have:
 
 - Node.js 18+ installed
-- npm or yarn package manager
+- npm 10.5.2+ package manager (as specified in packageManager)
 - A Sanity account and project
+- Basic knowledge of React 19 and Next.js 15
 
 ## 🔧 Installation
 
@@ -37,9 +41,9 @@ Before you begin, ensure you have:
 2. **Install dependencies**
    ```bash
    npm install
-   # or
-   yarn install
    ```
+   
+   Note: This project uses React 19 and Next.js 15 with specific version overrides defined in package.json.
 
 3. **Set up environment variables**
    
@@ -48,6 +52,8 @@ Before you begin, ensure you have:
    NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
    NEXT_PUBLIC_SANITY_DATASET=production
    SANITY_API_TOKEN=your_sanity_api_token
+   NEXTAUTH_SECRET=your_nextauth_secret
+   NEXTAUTH_URL=http://localhost:3000
    ```
 
 4. **Configure Sanity**
@@ -66,9 +72,9 @@ Before you begin, ensure you have:
 1. **Start the development server**
    ```bash
    npm run dev
-   # or
-   yarn dev
    ```
+   
+   This will automatically run type generation before starting the dev server.
 
 2. **Access the application**
    - Frontend: [http://localhost:3000](http://localhost:3000)
@@ -78,7 +84,7 @@ Before you begin, ensure you have:
 
 ```
 your_drc/
-├── app/                    # Next.js app directory
+├── app/                    # Next.js 15 app directory
 │   ├── studio/            # Sanity Studio pages
 │   └── ...                # Other app pages
 ├── sanity/                # Sanity configuration
@@ -86,12 +92,14 @@ your_drc/
 │   │   ├── author.ts      # Author schema
 │   │   ├── startup.ts     # Startup schema
 │   │   └── index.ts       # Schema exports
-│   └── structure.ts       # Studio structure
-├── components/            # React components
+│   ├── structure.ts       # Studio structure
+│   └── extract.json       # Generated type definitions
+├── components/            # React 19 components
 ├── lib/                   # Utility functions
 ├── public/               # Static assets
 ├── sanity.config.ts      # Sanity configuration
-└── next.config.js        # Next.js configuration
+├── tailwind.config.js    # Tailwind 4+ configuration
+└── next.config.js        # Next.js 15 configuration
 ```
 
 ## 📊 Content Schemas
@@ -124,23 +132,26 @@ your_drc/
 
 ### Styling
 
-The project uses Tailwind CSS for styling. Customize the design by:
-- Modifying `tailwind.config.js`
-- Adding custom CSS classes
-- Updating component styles
+The project uses Tailwind CSS 4+ for styling. Customize the design by:
+- Modifying `tailwind.config.js` (v4 syntax)
+- Using the new CSS-first configuration approach
+- Adding custom CSS classes with `@tailwindcss/typography` support
+- Utilizing Radix UI components for consistent design
 
 ## 🔧 Scripts
 
 ```bash
 # Development
-npm run dev          # Start development server
-npm run build        # Build for production
+npm run dev          # Start development server (with auto typegen)
+npm run build        # Build for production (with auto typegen)
 npm run start        # Start production server
+npm run lint         # Run ESLint
 
-# Sanity
-npm run sanity:start # Start Sanity Studio locally
-npm run sanity:build # Build Sanity Studio
-npm run sanity:deploy # Deploy Sanity Studio
+# Type Generation
+npm run typegen      # Generate TypeScript types from Sanity schemas
+
+# Sanity Studio
+# Access via /studio route in your app
 ```
 
 ## 📝 Content Management
@@ -186,6 +197,8 @@ The app can be deployed to any platform that supports Node.js:
 | `NEXT_PUBLIC_SANITY_PROJECT_ID` | Your Sanity project ID | Yes |
 | `NEXT_PUBLIC_SANITY_DATASET` | Sanity dataset name | Yes |
 | `SANITY_API_TOKEN` | Sanity API token (for writes) | Optional |
+| `NEXTAUTH_SECRET` | NextAuth.js secret key | Yes |
+| `NEXTAUTH_URL` | Your app's URL | Yes |
 
 ## 🤝 Contributing
 
@@ -209,6 +222,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **TypeScript errors with SchemaTypeDefinition**
 - Solution: Import without `type` keyword: `import { SchemaTypeDefinition } from "sanity"`
 
+**React 19 compatibility issues**
+- Ensure all dependencies support React 19
+- Check for deprecated React features and update accordingly
+
+**Tailwind CSS 4 configuration**
+- Use the new CSS-first configuration approach
+- Update class names if migrating from v3
+
+**NextAuth.js Beta issues**
+- Check the latest NextAuth.js 5.0 beta documentation
+- Ensure proper configuration for the beta version
+
 **Studio not loading**
 - Check environment variables are set correctly
 - Ensure Sanity project ID and dataset are valid
@@ -223,10 +248,13 @@ If you encounter any issues or have questions:
 
 ## 🙏 Acknowledgments
 
-- [Next.js](https://nextjs.org/) for the amazing React framework
-- [Sanity](https://www.sanity.io/) for the powerful CMS
-- [Tailwind CSS](https://tailwindcss.com/) for the utility-first styling
-- [Lucide](https://lucide.dev/) for the beautiful icons
+- [Next.js 15](https://nextjs.org/) for the cutting-edge React framework
+- [React 19](https://react.dev/) for the latest React features
+- [Sanity](https://www.sanity.io/) for the powerful headless CMS
+- [Tailwind CSS 4](https://tailwindcss.com/) for the modern utility-first styling
+- [NextAuth.js](https://next-auth.js.org/) for authentication
+- [Radix UI](https://www.radix-ui.com/) for accessible UI primitives
+- [Lucide](https://lucide.dev/) for the beautiful icon library
 
 ---
 
