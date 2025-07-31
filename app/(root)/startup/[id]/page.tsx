@@ -9,8 +9,10 @@ import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import markdownit from 'markdown-it'
 import { Skeleton } from '@/componets/ui/skeleton';
- import View from '@/componets/View';
+import View from '@/componets/View';
 import StartupCard, { StartupTypeCard } from '@/componets/StartupCard';
+import LavaLampWrapper from "@/componets/ui/LavaLampWrapper"; // ✅ This is the client component
+import BackButton from '@/componets/BackButton';
 
 const md = markdownit()
 
@@ -22,14 +24,14 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
       const id = (await params).id;
       const session = await auth();
-   
-      
-const [post, playlist] = await Promise.all([
-  client.fetch(STARTUPS_BY_ID_QUERY, { id }),
-  client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: "editor-picks-new" }),
-]);
 
-const editorPosts = playlist?.select || []; // ✅ safely access select
+
+      const [post, playlist] = await Promise.all([
+            client.fetch(STARTUPS_BY_ID_QUERY, { id }),
+            client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: "editor-picks-new" }),
+      ]);
+
+      const editorPosts = playlist?.select || []; // ✅ safely access select
 
       const parsedContent = md.render(post?.pitch || '');
       if (!post) return notFound()
@@ -39,9 +41,16 @@ const editorPosts = playlist?.select || []; // ✅ safely access select
       return (
             <>
 
+<div className="min-h-[530px] w-full flex flex-col justify-center items-center relative">
+      <LavaLampWrapper />
 
-                  <section className="w-full bg-[#5f364e]  min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6">
-                        <p className={`bg-amber-600 px-6 py-3 font-work-sans font-bold rounded-sm uppercase relative 
+            
+
+
+
+                  <section className="w-full  min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6">
+                         <BackButton  />
+                        <p className={`font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap px-6 py-3 font-work-sans  rounded-sm uppercase relative 
   before:content-[''] before:absolute before:top-2 before:left-2 
   before:border-t-[10px] before:border-t-black before:border-r-[10px] before:border-r-transparent 
   after:content-[''] after:absolute after:bottom-2 after:right-2 
@@ -49,16 +58,22 @@ const editorPosts = playlist?.select || []; // ✅ safely access select
                               {formatDate(post?._createdAt)}
                         </p>
 
-                        <h1 className="uppercase bg-black px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5">
+                        {/* <h1 className="uppercase bg-black px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5"> */}
+                                <h1 className="text-[36px] font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
+
                               {post.title}
                         </h1>
 
-                        <p className="font-medium text-[20px] text-white max-w-2xl text-center break-words">
+                        {/* <p className="font-medium text-[20px] text-white max-w-2xl text-center break-words"> */}
+                                    <p className="text-lg md:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed mt-1">
+
                               {post.description}
                         </p>
 
                         {/* <SearchForm query={query} /> */}
                   </section>
+                  
+</div>
 
                   <section className="px-6 py-10 max-w-7xl mx-auto">
 
@@ -75,7 +90,15 @@ const editorPosts = playlist?.select || []; // ✅ safely access select
                                           </div>
                                     </Link>
 
-                                    <p className='font-medium text-[16px] bg-amber-400 px-4 py-2 rounded-full text-black'>
+                                    {/* <p className='font-medium text-[16px] bg-amber-400 px-4 py-2 rounded-full text-black'> */}
+                                    <p className='
+                                    relative z-10 border text-foreground text-center text-base py-2 px-5 rounded-[20px]",
+        "bg-gradient-to-b from-background/90 to-muted/90 border-border/40",
+        "dark:from-background dark:to-muted dark:border-border'
+        style={{
+          background: `radial-gradient(circle, hsl(var(--foreground)), transparent 10%)`,
+          animationDuration: "6s",
+        }}>
                                           {post.category}
                                     </p>
                               </div>
@@ -101,7 +124,7 @@ const editorPosts = playlist?.select || []; // ✅ safely access select
 
                         <hr className='border-dotted bg-zinc-400 max-w-4xl my-10 mx-auto' />
 
-                        { editorPosts?.length > 0 &&  (
+                        {editorPosts?.length > 0 && (
                               <div className='max-w-4xl mx-auto' >
                                     <p className='text-30-semibold'>
                                           Editor Picks
@@ -119,7 +142,7 @@ const editorPosts = playlist?.select || []; // ✅ safely access select
 
                         <Suspense fallback={<Skeleton className='bg-red-500 h-10 w-24 rounded-lg fixed bottom-3 right-3' />}>
 
-                           <View id={id} initialViews={post?.views || 0}/>
+                              <View id={id} initialViews={post?.views || 0} />
                         </Suspense>
 
                   </section>

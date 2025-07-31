@@ -277,7 +277,7 @@ const StartupForm = () => {
   return (
     <form
       action={formAction}
-      className="max-w-2xl mx-auto bg-white my-10 space-y-8 px-6"
+      className="max-w-2xl mx-auto bg-white my-10 space-y-8 px-6 mt-10"
     >
       <div>
         <label
@@ -383,7 +383,7 @@ const StartupForm = () => {
 
       <Button
         type="submit"
-        className="bg-amber-800 border-[4px] border-black rounded-full p-5 min-h-[70px] w-full font-bold text-[18px] text-white"
+        className=" border-[4px] border-black rounded-full p-5 min-h-[70px] w-full font-bold text-[18px] text-white text-[36px] font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap"
         disabled={isPending}
       >
         {isPending ? "Submitting..." : "Submit Your Pitch"}
