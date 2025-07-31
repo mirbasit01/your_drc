@@ -69,7 +69,7 @@
 //   );
 // }
 
- import SearchForm from "@/componets/SearchForm";
+import SearchForm from "@/componets/SearchForm";
 import { auth } from "@/auth";
 import StartupCard, { StartupTypeCard } from "@/componets/StartupCard";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
@@ -87,57 +87,76 @@ export default async function Home({ searchParams }: {
 
   return (
     <div className="min-h-[530px] w-full flex flex-col justify-center items-center relative">
-<div className="relative w-full min-h-screen overflow-hidden">
-      <LavaLampWrapper /> 
+      <div className="relative w-full min-h-screen overflow-hidden">
+        <LavaLampWrapper />
 
-      <section
+        {/* <section
         className="w-full min-h-[530px] flex justify-center items-center flex-col py-10 px-6 relative"
-        // style={{
-        //   backgroundImage:
-        //     "linear-gradient(to right, transparent 49.5%, rgba(251, 232, 67, 0.2) 49.5%, rgba(251, 232, 67, 0.6) 50.5%, transparent 50.5%)",
-        //   backgroundSize: "5% 100%",
-        //   backgroundPosition: "center",
-        //   backgroundRepeat: "repeat-x",
-        // }}
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, transparent 49.5%, rgba(251, 232, 67, 0.2) 49.5%, rgba(251, 232, 67, 0.6) 50.5%, transparent 50.5%)",
+          backgroundSize: "5% 100%",
+          backgroundPosition: "center",
+          backgroundRepeat: "repeat-x",
+        }}
       >
-        {/* <h1 className="uppercase px-6 py-3 font-work-sans font-extrabold text-black sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5 mix-blend-exclusion"> */}
+        <h1 className="uppercase px-6 py-3 font-work-sans font-extrabold text-black sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5 mix-blend-exclusion">
         <h1 className="text-6xl md:text-8xl font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
           Pitch Your Startup, <br />
           Connect With Entrepreneurs
         </h1>
-        {/* <p className="font-medium text-[20px] text-black max-w-2xl text-center break-words mix-blend-exclusion"> */}
+        <p className="font-medium text-[20px] text-black max-w-2xl text-center break-words mix-blend-exclusion">
         <p className="text-lg md:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed mt-1">
           Submit Ideas, Vote on Pitches, and Get Noticed in Virtual Competitions.
         </p>
 
         <SearchForm query={query ?? undefined} />
-      </section>
+      </section> */}
 
-      <section className="px-6 py-10 max-w-7xl mx-auto relative z-10">
-        {/* <p className="relative z-10 border text-foreground text-base py-2 px-5 rounded-[20px]
+        <section
+          className="w-full min-h-[530px] flex justify-center items-center flex-col py-10 px-6 relative"
+        >
+          <h1
+            className="text-6xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mix-blend-exclusion text-white text-center leading-tight"
+          >
+            Pitch Your Startup, <br className="hidden sm:block" />
+            Connect With Entrepreneurs
+          </h1>
+
+          <p
+            className="text-base sm:text-lg md:text-xl text-center text-white mix-blend-exclusion max-w-2xl leading-relaxed mt-3"
+          >
+            Submit Ideas, Vote on Pitches, and Get Noticed in Virtual Competitions.
+          </p>
+
+          <SearchForm query={query ?? undefined} />
+        </section>
+
+        <section className="px-6 py-10 max-w-7xl mx-auto relative z-10">
+          {/* <p className="relative z-10 border text-foreground text-base py-2 px-5 rounded-[20px]
         bg-gradient-to-b from-background/90 to-muted/90 border-border/40
         dark:from-background dark:to-muted dark:border-border">
           {query ? `Search results for "${query}"` : "All Startups"}
         </p> */}
-        <p className="w-fit relative z-10 border text-foreground text-base py-2 px-5 rounded-[20px]
+          <p className="w-fit relative z-10 border text-foreground text-base py-2 px-5 rounded-[20px]
   bg-gradient-to-b from-background/90 to-muted/90 border-border/40
   dark:from-background dark:to-muted dark:border-border font-bold">
-  {query ? `Search results for "${query}"` : "All Startups"}
-</p>
+            {query ? `Search results for "${query}"` : "All Startups"}
+          </p>
 
 
-        <ul className="mt-7 grid md:grid-cols-3 sm:grid-cols-2 gap-5">
-          {data?.length > 0 ? (
-            data.map((post: StartupTypeCard) => (
-              <StartupCard key={post?._id} post={post} />
-            ))
-          ) : (
-            <p className="text-black text-sm font-normal">No startups found</p>
-          )}
-        </ul>
-      </section>
+          <ul className="mt-7 grid md:grid-cols-3 sm:grid-cols-2 gap-5">
+            {data?.length > 0 ? (
+              data.map((post: StartupTypeCard) => (
+                <StartupCard key={post?._id} post={post} />
+              ))
+            ) : (
+              <p className="text-black text-sm font-normal">No startups found</p>
+            )}
+          </ul>
+        </section>
+      </div>
     </div>
-    </div>
-    
+
   );
 }
