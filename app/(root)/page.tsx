@@ -117,7 +117,7 @@ export default async function Home({ searchParams }: {
           className="w-full min-h-[530px] flex justify-center items-center flex-col py-10 px-6 relative"
         >
           <h1
-            className="text-6xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mix-blend-exclusion text-white text-center leading-tight"
+            className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mix-blend-exclusion text-white text-center leading-tight"
           >
             Pitch Your Startup, <br className="hidden sm:block" />
             Connect With Entrepreneurs

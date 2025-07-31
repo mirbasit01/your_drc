@@ -208,6 +208,19 @@ const StartupForm = () => {
   const router = useRouter();
 
   const handleFormSubmit = async (prevState: any, formData: FormData) => {
+
+    if( !formData.get("title") || !formData.get("description") || !formData.get("category") || !formData.get("link") || !pitch) {
+      toast.toast({
+        title: "Error",
+        description: "Please fill in all fields before submitting",
+        variant: "destructive",
+      });
+      return {
+        ...prevState,
+        error: "All fields are required",
+        status: "ERROR",
+      };
+    }
     try {
       const formValues = {
         title: formData.get("title") as string,
@@ -233,27 +246,52 @@ const StartupForm = () => {
       return result;
     } catch (error) {
       console.log(error , 'errorerrorerrorerrorerror')
+      // if (error instanceof z.ZodError) {
+      //   const fieldErrors: Record<string, string[] | undefined> = {
+      // title: ['Title is required', 'Title must be at least 3 characters'],
+      // description: ['Description is required'],
+      //  link: undefined,
+      // category: ['Category is required'],
+      // };
+      //   // setErrors(fieldErrors as Record<string, string>);
+
+      //   toast.toast({
+      //     title: "Error",
+      //     description: "Please check your inputs and try again",
+      //     variant: "destructive",
+      //   });
+
+      //   return {
+      //     ...prevState,
+      //     error: "Validation failed",
+      //     status: "ERROR",
+      //   };
+      // }
       if (error instanceof z.ZodError) {
-        const fieldErrors: Record<string, string[] | undefined> = {
-  title: ['Title is required', 'Title must be at least 3 characters'],
-  description: ['Description is required'],
-  link: undefined,
-  category: ['Category is required'],
-};
-        // setErrors(fieldErrors as Record<string, string>);
+  const formattedErrors: Record<string, string> = {};
 
-        toast.toast({
-          title: "Error",
-          description: "Please check your inputs and try again",
-          variant: "destructive",
-        });
+  error.errors.forEach((err) => {
+    const field = err.path[0];
+    if (typeof field === "string") {
+      formattedErrors[field] = err.message;
+    }
+  });
 
-        return {
-          ...prevState,
-          error: "Validation failed",
-          status: "ERROR",
-        };
-      }
+  setErrors(formattedErrors);
+
+  toast.toast({
+    title: "Error",
+    description: "Please check your inputs and try again",
+    variant: "destructive",
+  });
+
+  return {
+    ...prevState,
+    error: "Validation failed",
+    status: "ERROR",
+  };
+}
+
 
       toast.toast({
         title: "Error",
@@ -277,7 +315,7 @@ const StartupForm = () => {
   return (
     <form
       action={formAction}
-      className="max-w-2xl mx-auto bg-white my-10 space-y-8 px-6 mt-10"
+      className="max-w-2xl mx-auto bg-white my-10 space-y-8 px-6"
     >
       <div>
         <label
@@ -328,7 +366,7 @@ const StartupForm = () => {
           name="category"
           className="border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300"
           placeholder="Startup Category (Tech, Health, Education...)"
-          required
+           
         />
         {errors.category && (
           <p className="text-red-500 mt-2 ml-5">{errors.category}</p>
@@ -347,7 +385,7 @@ const StartupForm = () => {
           name="link"
           className="border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300"
           placeholder="Startup Image URL"
-          required
+           
         />
         {errors.link && (
           <p className="text-red-500 mt-2 ml-5">{errors.link}</p>
