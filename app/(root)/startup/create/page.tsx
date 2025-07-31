@@ -22,8 +22,7 @@ const Page = async () => {
           backgroundRepeat: "repeat-x",
         }}>
           
-        {/* <h1 className="uppercase bg-black px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5"> */}
-         <h1 className="text-[54px] font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
+          <h1 className="text-[54px] font-bold tracking-tight mix-blend-exclusion text-white whitespace-nowrap">
           Submit Your Startup</h1>
       </section>
       {/* <BackButton/> */}
