@@ -209,13 +209,13 @@ const Navbar = async () => {
     const session = await auth()
     // console.log(session.user.id , 'session.user.id')
     return (
-        <header className='px-5 py-3 bg-white shadow-sm font-work-sans' style={{ background: 'white' }}>
+        <header className='px-5 py-3 bg-transparent  font-work-sans'>
             <nav className='flex  justify-between  items-center'>
                 <Link href="/">
                     <img src="/logo.png" alt="logo.png" width={144} height={30} />
                 </Link>
 
-                <div className='flex items-center gap-5 text-black'>
+                <div className='flex items-center gap-5 text-black font-bold' >
                     {session?.user ? (
                         <>
                             <Link href='/startup/create'>
@@ -249,7 +249,7 @@ const Navbar = async () => {
                                 await signIn("github");
                             }}
                         >
-                            <button type="submit">Login</button>
+                            <button type="submit" style={{color: 'black'}}>Login</button>
                         </form>
                     )}
                 </div>
